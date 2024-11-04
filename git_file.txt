@@ -1,0 +1,322 @@
+# Introduction
+
+## Version Control/ Source code Management/ Revision Control.
+
+It is the practice of keeping track and managing changes made to software codes. Version control systems/software (VCS) are software tools used to keep track and manage changes made in source code. Since they keep track of every modification made to codes, VCS allows one to move back in time and compare current codes to previous codes to help fix mistakes that arise with minimum disruption of other team members and their work.
+
+VCS help teams work on the same project simultaneously and prevents their works from conflicting by tracking changes of each contributor. Thus when a change made by one developer is incompatible with that of another developer working on same project, it is discovered on time and solved in a manner that does not block workings of other team members.
+
+A good VCS:
+1. Supports a developers preferred workflow.
+2. Works on any platform rather than dictating which O/S to use.
+3. Facilitates a smooth and continuous flow of changes to code.
+
+	### Benefits VCS
+
+1. A complete long term change history of every file.
+VCS keeps a record history of changes made to each file. This history for each file includes the author, date and written notes on why change was made. A complete history allows access of previous project versions helping in root cause analysis for its bugs. This can be used to undo changes in files and is of significance when working on previous version of the code.
+
+2. Branching and Merging
+VCS allows creation of branches thus the ability to keep multiple streams of work independent from each other. This branches can then be merged into one enabling teams verify changes that don't conflict.
+
+3. Traceability
+VCS enables the ability to trace work items across a project's lifecycle.
+
+4. Prevention of overwrites
+By keeping track of each developers work,  VCS identify areas of conflicts and prevent overwrites by pointing conflicts in work to developers to be addressed.
+### Best practices in VCS
+
+1. Commit Often
+ commit is a snapshot of the current work. Committing saves  historical record of changes made to each file. When you commit:
+- You save your work - this keeps a record of changes made.
+- You add a comment of why change was made.
+- You can keep track of works in the project.
+Frequent commits allow undoing and redoing of works when needed.
+A group of commits can be integrated into a single commit to allow for a clean commit history.
+
+2. Ensure you're working from latest version
+VCS allows for rapid updates from multiple developers working on same project which can lead one's local copy falling  behind the global copy. Always git pull or fetch latest code before making updates to avoid conflicts during merge time.
+
+3. Make detailed notes.
+Each commit prompts one to input a comment (log message) as to why change was made. The comment should be descriptive and explanatory and answer the why and what that encompass(includes) the commit message.
+
+4. Review changes before commit.
+VCS provide a staging area that is used to review changes before creating a commit snapshot. The staging area allows you to see files ready for commit and those not included for commit. This reduces the chances of including or excluding files that required for committing.
+
+5. Use Branches
+Branches allow developers create different lines of development enabling them work in independent development environments. Branches of each developer on the same project can be merged into a main line of development to have the project that was in bits as one.
+
+6. Agree on workflow
+Developers should agree on same workflow to avoid work conflicts during merge time.
+
+	### Types of VCS
+
+There are two types of version control systems and these are :
+1. Centralized Version Control System (CVCS): In CVCS, all version history is stored on a central server. Users check out files to work on, and the central server handles synchronization and history. Because it relies on a central repository, it’s not distributed. Eg: Subversion (SVN).
+
+2.Distributed Version Control System (DVCS): In DVCS, each user has a complete copy of the repository, including its history. This allows for offline access and greater redundancy, as each copy is fully independent of others. DVCS is distributed by design. Eg: Git
+
+# GIT
+It is a distributed version control system.
+
+## Installing Git
+
+	### On windows
+- https://gitforwindows. Click link to download.
+- After initiating the installer  press 'next' recursively then 'finish' prompts to install git on default options.
+- Once installed open "GIT Bash" enter CMD "git --version" to verify successful installation and check version installed.
+- To configure your machine with your Git username and email use the following CMDS:
+`git config --global user.name "your username"`
+`git config -global user.email "your email"`
+
+	### On Linux 
+Open bash terminal and run below CMDS
+`sudo apt-get updates`
+`sudo apt-get install git`
+- Next, you'll need to install necessary dependencies for git in Linux using the below CMDS
+`sudo apt-get update`
+`sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc xmlto docbook2x`
+
+## Git URL Protocols
+Git uses 3 main URL protocols to link local machines to its servers (remote repos).
+
+	1. HTTPs
+The method requires providence of Git credentials every time you interact with remote repos. Even though it is easy to set it is inconvenient in the long run and less secure than the next method.
+
+	2.  SSH
+SSH stands for Secure Shell which is a network protocol that is used for remote communications between computer connected to an unsecured network. We can also refer to it as a network protocol that is used to authenticate users to their accounts without need of providing account credentials. It is used for Remote File Transfer, Network Management and Remote O/S Access.
+	3. Git protocol
+
+	### How SSH Works.
+It employs use of various cryptographic algorithms with the most common being RSA which has a capacity of up-to 4096 bits. The RSA cryptographic algorithm uses prime numbers to generate its two keys which are the public and private keys. The private key consists of two large prime numbers whereas the private key is generated using two large prime numbers, which are multiplied together to form it.
+The public key is shared with remote parties and is used to encrypt data whilst the private key is safely hidden in the machine as it's used to decrypt. For third parties to access the encrypted message they'll have to get the factors of the prime number which in most cases is almost impossible. Only users with the private keys can easily decrypt the data. Public keys are generated from private keys and not vice versa
+
+	### Generating an SSH Key.
+To generate SSH Key Execute the CMD:
+`SSH-keygen -t RSA -b 4096 -c "your email"` where;
+`SSH-keygen` generates a new SSH
+`-t RSA` defines type of cryptographic algorithm used `DSA` algo also used
+`-b 4096` indicates the size of the SSH and in our case its 4096 bits. The larger the size the harder it is to crack encrypted data 
+`-C "your email"` adds comment to the key. It's advised to use email as comment especially when dealing with multiple keys.
+
+After executing CMD you'll be prompted to specify storage location for the key. Press enter to set at default storage. Next you'll be prompted to provide a passphrase (password) for your SSH. One is needed to provide the passphrase each time they use the key. This is necessary as it ensures the key is not accessed by other users using the same machine.
+
+	### Adding SSH keys to SSH agent
+An SSH agent is used to hold and manage private keys enabling secure and convenient authentications without need of re-entering pass-phrase each time SSH is used.
+It is used to broker authentication requests with the private key ensuring that private keys are indirectly exposed each time they are needed to assess authentication request and pass them if they are correct.
+In simpler terms, SSH agent stores private keys and handles sign in operations reducing direct exposure of the private key to severs. The agent uses the private key to digitally sign authentication requests from systems. Note that the server which receives authentication request from users must have a public key generated from a private key and if this two don't match then the authentication request is denied.
+
+# Setting up a Repository
+A Repository is a virtual storage that allows one to save versions of their code and access them if need to.
+
+	### Types of repos:
+1. Local repo
+It is a storage location in your machine that stores your project and all its commit history. In it is a `.git` directory with git metadata and configuration
+2. Remote repo
+A shared repo on a server that allows developers collaborate on same project and it enables pushing and pulling changes between users' local repos
+3. Bare Repo
+This repo doesn't contain the working directory and is used as a central repo in git where developers push/pull changes from. Can be created using `git init` and `git clone` cmds
+4. Private remote repo
+A repo on a server that is private and can only be accessed by authorized contributors
+
+## initializing a new repo
+In git the CMD `git init` is used to initialize a new repo or to convert an existing un-versioned project into a git repo. Executing the CMD creates a `.git` subdirectory in the current working directory that contains all the required git metadata and Git configuration required to run its CMDS. This also creates a new main local branch and a HEAD that points to the currently checked out commit.
+Once a local repo has been initialized it can be linked to the remote repo in using `git remote add origin <repo URL>` CMD where `origin` is a label used by GIT to refer to remote repos. Git allows `origin` to be used for all remote repos because each local repo has it's own Git configuration making `origin` unique in each of them
+
+1. When remote repo is empty.
+We use `git remote add origin <repo URL>` then we push local repo contents to remote repo using `git push -u origin <remote branch name>`
+
+2. When remote repo has content/s
+In order to push to a remote repo, commit histories should align in local and remote repos. Trying to push our initialize remote repo which has no commit history(or history doesn't align) fails. We counter this by forcing the push but this overwrites the contents in the remote repo. (`git push -u -f origin <branch name>`)
+`-u` tell git to create new branch. To avoid this run the CMDS in order;
+`git remote add origin <repo url>`
+`git pull origin <branch name>`
+carry out the next steps; staging, committing and pushing (git push origin <branch name> files
+In events where you stage and commit files use steps below
+`git remote add origin <repo URL>`
+`git rebase origin/main` - aligns remote repo's commit history with local one
+then push files to remote repo.
+
+To avoid creating new unknown branches, makes sure the local and repo branch names are the same. Use `git branch -M <remote branch name>` to have same name for both repos.
+
+
+## Cloning an existing remote repo
+If a remote repo exists it can be copied to a machine with all its contents using the `git clone` CMD. Git uses various network protocols in cloning repositories with the common one being SSH. When cloning a new folder is created in the machine with the name of the remote repo. The folder contains the full history of the remote repo and a newly created main branch. The folder also contains a `.git` directory that works as that in `git init`
+
+CMD						Function
+1. `git clone <repo URL>`			- Clones remote repo. Use SSH URL to clone.
+						- CMD requires one to navigate to directory you want to clone to.
+
+2. `git clone <repo URL> <directory/path>`	- Clone to a specified folder.
+
+3. `git clone --branch <tag> <repo URL>`	- Clone a specific tag.
+						- A tag is a label that points to a specified commit history.
+						- It's used to mark important points, eg; releases for easy referencing.
+
+4. `git clone -depth=1 <repo URL>`		- shallow cloning.
+						- Used to clone repos with extensive commit history that utilize more space and time when cloning.
+
+5. `git clone --branch <repo URL>`		- clones a specific branch
+
+## Configuration in Git
+The `git config` CMD is used to set Git configuration values on a local, global or system level. The CMD has 3 files that specify which level will the setup be executed at.
+
+1. `-- local`  - setup will be applied in the current local repo enviroment and configuration values can be found in  `.git/config`.
+
+2. `-- global` - setup will applied is applied in a given user's account and configuration values can be found in `~ /.gitconfig` (unix) or `C:\Users\\.gitconfig`.
+
+3. `--system` - setup is applied across an entire machine covering all users on O/S and all local repos and configurations files are in `(prefix)/etc/gitconfig` (unix) and `C:\ProgramData\Git\config`
+
+	### Configuring Git user name and password
+1. `git config --global user.name "<username>"`
+2. `git config --global user.email "useremail"
+
+	## configuring default editors
+`git config --global core.editor "editor_name(like nano) -w"`. `-w` disables line wrapping
+
+`git config --global --edit` - opens configuration file in editor for editting
+
+## Aliases in Git
+Aliases are commonly used in git to shorten long CMDS. The aliases are stored in configuration files. 
+Syntax; `git config --global alias.<alias-name> <git-command>`
+Examples
+
+1. `git config --global alias.st status`  - creates a git CMD `git st` which checks state of working area just like `git status`
+2. `git config --global alias.br branch`
+3. `git config --global alias.up rebase`
+4. `git config --global alias.unstage 'reset HEAD --'
+`	-CMD unstages staged files of the current commit
+
+
+# Saving changes in GIt.
+In Git saving is synonymous as committing where updated files don't overwrite on their previous version. Saving in Git does not require internet access. This is because commits are captured locally and pushed to remote servers 
+
+## git add
+It is used to add new and modified files into the staging area awaiting for commits which can then be pushed to remote repos
+
+`git add <file>`	- stages all changes in specific file
+`git add <directory>`	- stages all changes in specified directory
+`git add -p <file>``	- interactive CMD that lets you choose portions of file to stage with options;
+	y to stage chunk
+	n to ignore chunk
+	s to split chunk to smaller ones
+	e to manually edit chunk
+	q to quit interactive session
+
+## git commit
+Used to capture a snapshot of currently staged files. When you commit, you are saving, keeping a record and preparing the staged files to be pushed to remote servers.
+When committing, git prompts one to input a message that explains the context of the commit
+Git snapshots are saved in the local repo and each commit created has its unique identifier which is used to refer to it. This unique identifiers are created using a cryptographic hash algorithm known as SHA-1. The commit hash allows developers to move from one commit to another enabling them go back in time.
+
+`git commit -m "<comment>"`		-commits staged files`
+`git commit -am "comment"		-commits tracked files in the working directory
+`git commit --amend -m "<message>"`	-it adds staged files to the current commit instead of creating a new commit
+`git log`	- displays the commit history with each commits author, commit message and hash and date
+`git log --oneline`	- displays a more defined commit history with only the commit hasg and message
+
+## Git diff
+`git diff` it shows changes made to tracked files in the local repo
+`git diff <file>` is used to show changes made in a tracked files in the working directory
+`git diff --cached <file>`shows changes in a staged file
+
+Git Refs(commit hashes, HEAD, tags, branch names etc) can also be passed in the CMD. For instance, the CMD can be passed to a commit hash to compare each file in that commit with their versions before they were committed.
+
+`git diff <commit hash>`	-Compares specified commit with the current working directory 
+`git diff <commit1> <commit2>`	-Compares 2 specified commit messages with <commit1> one as the previous and <commit2> as the recent one
+--------------------------------------------------------------------------INCOMPLETE----------------------------------------------------------------
+----------------------------------ALSO CHECH STASH & IGNORE---------------
+
+## Git Tag
+A tag is a ref in git that points to specific commits in Git history. A rag is just like a branch but static. (Means that they only point to the specified commit). You can think of a tag as a label on a specified commit that is used to refer to that specified commit. Tags are mostly used to mark version releases in a project. Tags are of two types
+
+		### Types of tags
+1. Annotated tags
+They are tags that are stored as object in git and contain extra metadata like tagger name, email, date and a tag message (comment briefing the tag).
+Syntax; `git tag -a <tag_name> -m "<comment>"`
+eg; `git tag -a v1.4 -m "my version 1.4"`
+
+2. Lightweight tags
+This tags contain just the tagger name 
+`git tag <tag_name>`
+	
+		### Listing tags
+`git tag	`		-CMD lists down a list of existing tags	
+`git tag -l *<wildcard>*`	-Lists down tags with a string pattern matching  the wildcard
+
+		### Tagging old commits
+`git tag -a <tag_name> <commit hash> -m <message>`	-CMD is used to tag old commits by specifying their commit hashes.
+
+		Retagging/Replacing existing tags
+Tags are unique. Trying to create a tag with the same label as an existing one brings errors. If necessary use the `-f` flag for retagging or replacing existing tags.
+`git tag -a -f v1.4 15027957951b64cf874c3557a0f3547bd83b3ff6`
+
+		### Pushing tags
+By default git does not push tags and will only do that if the CMD is executed. 
+`git push origin <tag_name>`
+To push multiple tags, use the `--tags` flag
+
+		Checking out and deleting tags
+---`git checkout <tag_name>`--- is used to move from one tag to another. This allows viewing the state of a repo at a tag. The above CMD is same as checking out to the commit labelled by the tag. This leads to a detached HEAD state as the HEAD is not pointing to the current commit. Any new commits created in this states have no  branch pointing at them and they are called orphaned commits. This commits can be viewed using --- `git reflog`---. However this commits are there temporary and it's best to create a new branch anytime you make changes or create commits in a detached state.
+
+`git tag -d <tag_name>`		- deleted specified tag.
+
+## Git blame
+It’s used to display metadata about which author made changes to each line in a file like, author name, commit hash, modified line, date and time. It only operates on individual files and it's functionality is used in troubleshooting.
+
+`git blame <file_name>`
+some of the flags applicable are
+
+1. `git blame -L 1,5 <file_name>`	-Restrict line output in specified range
+2. `git blame -e <file_name>`		-Displays authors user instead of name
+3. `git blame _w <file_name>`		-ignore whitespace changes 
+4. `git blame -M <file_name>`		-detects moved or copied files within same file. This displays the original author of the files instead of that who moved/copied the lines.
+5. `git blame -C <file_name>`		-performs just as above CMD
+
+		### git blame vs git log
+`git log`is more convenient when one need to know when a line was originally added to a file, modified or even deleted. This way you will get the authors name, commit hash  date and time as to when this actions were performed.
+syntax
+`git log -S"line" --pretty=format:'%h %an %ad %s'`, where
+`-S`	-searches for the line
+`%h`	-shows commit hash
+`%an`	-shows author name
+`ad`	-shows commit date
+`%s`	-shows commit message
+
+# Undoing commits & changes
+Think of git as a time management utility where commits are snapshots of a point in time/ points of interest along the timeline of a project. Undoing in git is like moving back in time to a point where the mistake done DNE. To do this, you need the commit hash for the point in time you want to revisit. The git log command shows the commit history of the current branch, while git log --branches=* displays all commits across branches. After finding the commit you want, use git checkout <commit-hash> to load it. This will place you in a "detached HEAD" state.
+Once you are in a commit of interest, it is possible to view committed files at that time, compile the project, run tests and even edit files without affecting the current version of the project. However, these changes are not saved in the main project; to continue developing, return to the latest project state by checking out the current branch.---`git checkout <branch_name>`---
+
+## Undoing committed snapshots
+There are several way to undo committed snapshots such as;
+
+1 Git checkout
+---`git checkout <commit_hash>`--- can be used to move to a previous commit if there are error in the current one. This leaves us in a detached HEAD state and one won't be working on any branch. Thus when checking out to an existing branch any new commits in detached state will be orphaned. Git holds onto orphaned commits temporarily, thus it's advisable to create a new branch (---`git checkout -b <branch_name>`---) to avoid losing these commits. When you create the branch to accommodate the orphaned commits, notice that the current commit (with errors) DNE in this new timeline making it less ideal to use checkout as means of undoing changes.
+
+2.Git revert
+It is used to undo changes in specified commits and it creates a new commit in current whose record shows the undone changes. Using the CMD is ideal when working with public repos and doesn't require creation of new branches. However, it's not that suitable when you need the log history to be minimized and curated (minimized).
+
+3. Git reset
+The CMD is used to undo changes in the remote repo, staging area and working area based on the arguments given to it. However, it is not convenient when working with shared repos 
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
