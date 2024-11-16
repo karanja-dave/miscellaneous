@@ -94,6 +94,7 @@ The public key is shared with remote parties and is used to encrypt data whilst 
 	### Generating an SSH Key.
 To generate SSH Key Execute the CMD:
 `SSH-keygen -t RSA -b 4096 -c "your email"` where;
+
 `SSH-keygen` generates a new SSH
 `-t RSA` defines type of cryptographic algorithm used `DSA` algo also used
 `-b 4096` indicates the size of the SSH and in our case its 4096 bits. The larger the size the harder it is to crack encrypted data 
@@ -181,11 +182,10 @@ Aliases are commonly used in git to shorten long CMDS. The aliases are stored in
 Syntax; `git config --global alias.<alias-name> <git-command>`
 Examples
 
-1. `git config --global alias.st status`  - creates a git CMD `git st` which checks state of working area just like `git status`
+1. `git config --global alias.st status`  		-creates a git CMD `git st` which checks state of working area just like `git status`
 2. `git config --global alias.br branch`
 3. `git config --global alias.up rebase`
-4. `git config --global alias.unstage 'reset HEAD --'
-`	-CMD unstages staged files of the current commit
+4. `git config --global alias.unstage 'reset HEAD --'	-CMD unstages staged files of the current commit
 
 
 # Saving changes in GIt.
@@ -211,8 +211,8 @@ Git snapshots are saved in the local repo and each commit created has its unique
 `git commit -m "<comment>"`		-commits staged files`
 `git commit -am "comment"		-commits tracked files in the working directory
 `git commit --amend -m "<message>"`	-it adds staged files to the current commit instead of creating a new commit
-`git log`	- displays the commit history with each commits author, commit message and hash and date
-`git log --oneline`	- displays a more defined commit history with only the commit hasg and message
+`git log`				-displays the commit history with each commits author, commit message and hash and date
+`git log --oneline`			-displays a more defined commit history with only the commit hasg and message
 
 ## Git diff
 `git diff` it shows changes made to tracked files in the local repo
@@ -240,7 +240,7 @@ This tags contain just the tagger name
 `git tag <tag_name>`
 	
 		### Listing tags
-`git tag	`		-CMD lists down a list of existing tags	
+`git tag`		 	-CMD lists down a list of existing tags	
 `git tag -l *<wildcard>*`	-Lists down tags with a string pattern matching  the wildcard
 
 		### Tagging old commits
