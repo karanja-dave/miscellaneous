@@ -1,1 +1,1 @@
-This repository is a collection of additional skills and resources supporting my personal and professional growth. It serves as a space for notes, practice, and resources in various topics I explore along the way.
+# This repository is a collection of additional skills and resources supporting my personal and professional growth. It serves as a space for notes, practice, and resources in various topics I explore along the way.
