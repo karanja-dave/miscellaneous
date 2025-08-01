@@ -1,0 +1,27 @@
+#Documentation of problems encountered in git and solutions
+
+
+
+#linking and unlinking local and remote repo
+
+#linking
+>git remote add origin <ssh_link>
+
+#check remote repo linked to local repo
+>git remote -v
+
+#unlinking
+>git remote remove origin
+
+#ignoring files you don't want to track
+Use the cmd "nano .gitignore" to create and edit the "gitignore" file.
+This file defines which files git should ignore
+
+Say you had already commited some files and added them to the ignore file
+When you push this changes the files won't be ignored as they were still tracked prior.
+Below is how you untrack files previously commited but should be ignore
+
+>git rm -r --cached .
+>git add .
+>git commit -m "untrack ignored files"
+>git push
