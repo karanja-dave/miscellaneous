@@ -1,11 +1,15 @@
-#Documentation of problems encountered in git and solutions
+###Documentation of problems encountered in git and solutions
 
 
-
-#linking and unlinking local and remote repo
+##linking and unlinking local and remote repo
 
 #linking
 >git remote add origin <ssh_link>
+>git -M main 		#names branch to be main
+>git pull origin main 	#fetches and merge commits of remote repo to local repo
+		      	#ensures local and remote have same commits
+		      	#works when local repo has no commit history of its own
+			#Does the work of git fetch and git merge
 
 #check remote repo linked to local repo
 >git remote -v
@@ -13,7 +17,22 @@
 #unlinking
 >git remote remove origin
 
-#ignoring files you don't want to track
+##linking local and remote repo (local repo has own log history)
+Say you have a local folder that has it's own commit history.
+When you try to pull you'll get an error
+Git is trying to merge history but can't becasue local repo has own commit history
+Follow steps below to solve the issue
+
+>git fetch origin main	#loads commit of remote repo to local repo
+>git rebase origin/main	#appends local commits on top of remote commits
+
+##linking local and remote repo (Both repo have same files)
+
+
+
+
+
+##ignoring files you don't want to track
 Use the cmd "nano .gitignore" to create and edit the "gitignore" file.
 This file defines which files git should ignore
 
